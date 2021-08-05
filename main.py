@@ -6,13 +6,14 @@ def exit():
 def save():
     filename = title.get('1.0','end')
     filename = filename.strip() + '.txt'
-    print(filename)
     output = open(filename +'.txt', 'w')
     text = textbox.get('1.0','end')
     output.write(text)
     output.write("hello world")
 
-    print(text)
+
+def open():
+    pass
 
 
 root = Tk()
@@ -35,8 +36,7 @@ root.config(menu=menubar)
 
 fileMenu.add_command(label="Save", command=save)
 fileMenu.add_command(label="Exit", command=exit)
-editMenu.add_command(label="Undo")
-editMenu.add_command(label="Redo")
+fileMenu.add_command(label='Open', command=open)
 
 #title
 frame = Frame(root, width=10, height = 160)
@@ -47,6 +47,8 @@ title.pack(side = TOP)
 #text box
 textbox = Text(root, yscrollcommand = scrollbar.set, undo=True)
 textbox.pack(fill = BOTH, expand = True)
+editMenu.add_command(label="Undo", command=textbox.edit_undo)
+editMenu.add_command(label="Redo", command=textbox.edit_redo)
 
 
 scrollbar.config(command=textbox.yview)
