@@ -1,5 +1,19 @@
 import sys
 from tkinter import *
+def exit():
+    root.destroy()
+
+def save():
+    filename = title.get('1.0','end')
+    filename = filename.strip() + '.txt'
+    print(filename)
+    output = open(filename +'.txt', 'w')
+    text = textbox.get('1.0','end')
+    output.write(text)
+    output.write("hello world")
+
+    print(text)
+
 
 root = Tk()
 root.geometry("600x800")
@@ -19,8 +33,8 @@ editMenu = Menu(menubar)
 menubar.add_cascade(label="Edit", menu=editMenu)
 root.config(menu=menubar)
 
-fileMenu.add_command(label="Item")
-fileMenu.add_command(label="Exit")
+fileMenu.add_command(label="Save", command=save)
+fileMenu.add_command(label="Exit", command=exit)
 editMenu.add_command(label="Undo")
 editMenu.add_command(label="Redo")
 
@@ -28,7 +42,6 @@ editMenu.add_command(label="Redo")
 frame = Frame(root, width=10, height = 160)
 frame.pack()
 title = Text(frame, background = 'Yellow', height=1.5)
-title.insert(INSERT, "Title: ")
 title.pack(side = TOP)
 
 #text box
